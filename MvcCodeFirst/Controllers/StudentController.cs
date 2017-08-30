@@ -79,6 +79,16 @@ namespace MvcCodeFirst.Controllers
                 return View(student);
             }
         }
+
+        public JsonResult IsValidName(string Name)
+        {
+            StudentDbContext dbContext = new StudentDbContext();
+            Student student = dbContext.students.Where(c => c.Name == Name).FirstOrDefault();
+            bool isValid = student != null ? false : true;
+            //string name = "test123";
+            //bool isValid = name == Name ? false : true;
+            return Json(isValid, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Edit(int Id)
         {
             StudentDbContext dbContext = new StudentDbContext();
